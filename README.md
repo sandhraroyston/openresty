@@ -12,13 +12,11 @@ Replace . with the correct context directory if your Dockerfile is in a subfolde
 
 ⚙️ Step 2: Install KIND
 Follow the official KIND installation guide.
+https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 
 ⛴️ Step 3: Create KIND Cluster with Port Mapping
 Create a kind-cluster.yaml file with the following content:
 
-yaml
-Copy
-Edit
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -33,30 +31,23 @@ nodes:
       - containerPort: 30080
         hostPort: 30080
         protocol: TCP
+
 Now create the cluster:
 
 bash
-Copy
-Edit
 kind create cluster --name <cluster-name> --config kind-cluster.yaml
 
 It maps container ports to your host to expose services like HTTP (80), HTTPS (443), or custom ports like 30080.
 
 🧭 Step 4: Set the New KIND Cluster as Current Context
 bash
-Copy
-Edit
 kubectl config use-context <culster-name>
-Confirm it:
 
-bash
-Copy
-Edit
+To confitm:
 kubectl config current-context
+
 🌐 Step 5: Install NGINX Ingress Controller
 bash
-Copy
-Edit
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
 This installs the NGINX ingress controller required to route traffic to your services.
 
